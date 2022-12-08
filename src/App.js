@@ -35,6 +35,9 @@ export const App = () => {
         add.setAttribute("data-bs-dismiss", "modal");
         add.click();
        
+        (()=>{
+            add.setAttribute("data-bs-dismiss", "modal");
+        })()
       }
     };
     //collect data
