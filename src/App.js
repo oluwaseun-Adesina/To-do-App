@@ -11,14 +11,14 @@ export const App = () => {
 
     let form = document.getElementById("form");
     let textInput = document.getElementById("textInput");
-    let dateInput = document.getElementById("dataInput");
+    let dateInput = document.getElementById("dateInput");
     let textarea = document.getElementById("textarea")
     let msg = document.getElementById("msg");
     let tasks = document.getElementById("tasks");
     let add = document.getElementById("add");
 
     //form validation
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", (e)=>{
       e.preventDefault();
       formValidation();
     });
@@ -32,76 +32,44 @@ export const App = () => {
         console.log("success");
         msg.innerHTML = "";
         acceptData();
-        add.setAttribute("data-bs-dismiss", "modal");
-        add.click();
-
-        (() => {
-          add.setAttribute("data-bs-dismiss", "");
-        })();
+       
       }
     };
     //collect data
-    let data = [];
+    let data = {};
 
     let acceptData = () => {
-      data.push({
-        text: textInput?.value || '',
-        date: dateInput?.value || '',
-        description: textarea?.value || '',
-      });
+     data["text"] = textInput.value;
+     data["date"] = dateInput?.value || '';
+     data["description"] = textarea?.value || '';
 
-      localStorage.setItem("data", JSON.stringify(data));
-
-      console.log(data);
-     createTasks();
+    createTasks();
     }
 
     //create new tasks
     let createTasks = () => {
-      tasks.innerHTML = "";
-      data.map((x, y) => {
-        return (tasks.innerHTML += `
-        <div id=${y}> 
-              <span class="fw-bold">${x.text}</span>
-              <span class="small text-secondary">${x.date}</span>
-              <p>${x.description}</p>
+      tasks.innerHTML += `
+      <div>
+              <span class="fw-bold">${data.text}</span>
+              <span class="small text-secondary">${data.date}</span>
+              <p>${data.description}</p>
       
               <span class="options">
                 <i onClick= "editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fa-solid fa-pen-to-square"></i>
                 <i onClick ="deleteTask(this);createTasks()" class="fa-solid fa-trash"></i>
               </span>
             </div>
-        `);
-      });
-    
-      resetForm();
+        `;
+        resetForm();
     };
-    let resetForm = () => {
-      textInput.value = "";
-      dateInput.value = "";
-      textarea.value = "";
-    };
+   let resetForm = () => {
+    textInput.value = "";
+    dateInput.value = "";
+    textarea.value = "";
+   }
+ 
     //delete a task
-    let deleteTask = (e) => {
-      e.parentElement.parentElement.remove();
-    
-      data.splice(e.parentElement.parentElement.id, 1);
-    
-      localStorage.setItem("data", JSON.stringify(data));
-    
-      console.log(data);
-      
-    };
-//edit a task
-let editTask = (e) => {
-  let selectedTask = e.parentElement.parentElement;
 
-  textInput.value = selectedTask.children[0].innerHTML;
-  dateInput.value = selectedTask.children[1].innerHTML;
-  textarea.value = selectedTask.children[2].innerHTML;
-
-  deleteTask(e);
-};
 
   })
   return (
@@ -109,12 +77,12 @@ let editTask = (e) => {
     <React.Fragment>
       <div className='bg-neutral-300 w-full h-screen grid'>
 
-        <div className='bg-white text-neutral-700 m-auto border-4 border-blue-400 w-5/6 md:w-1/3 h-5/6 rounded-lg'>
+        <div className='app bg-white text-neutral-700 m-auto border-4 border-blue-400 w-5/6 md:w-1/3 h-5/6 rounded-lg pb-5'>
           <div className='px-3 py-3'>
             <p className='font-bold text-3xl'>TODO App</p>
             <br/>
             <div id="addNew" className='flex justify-between align-items-center bg-blue-200 px-3 py-2 rounded-md cursor-pointer' data-bs-toggle="modal" data-bs-target="#form">
-              <span className='text-xl'>Add New Task </span>
+              <span className='text-xl '>Add New Task </span>
               <i class="fa-solid fa-plus bg-blue-300 p-2 rounded" ></i>
             </div>
           </div>
@@ -139,7 +107,7 @@ let editTask = (e) => {
                 </div>
                 <div class="modal-body">
                   <p>Task Title</p>
-                  <input type="text" class="form-control" name="" id="textInput" />
+                  <input type="text" class="form-control" name="text" id="textInput" />
                   <div id="msg" className='tex-red-500'></div>
                   <br />
                   <p>Due Date</p>
