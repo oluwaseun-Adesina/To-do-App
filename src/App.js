@@ -32,6 +32,8 @@ export const App = () => {
         console.log("success");
         msg.innerHTML = "";
         acceptData();
+        add.setAttribute("data-bs-dismiss", "modal");
+        add.click();
        
       }
     };
