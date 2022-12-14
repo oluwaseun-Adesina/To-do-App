@@ -82,8 +82,9 @@
   .app{
     padding: 1em;
     width: 80%;
-    height: 80%;
+    height: 70%;
     margin: 0em;
+    margin-top: -7em;
   }
 
 }
