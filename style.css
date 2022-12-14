@@ -13,9 +13,9 @@ body{
     color: neutral;
     margin: auto;
     border: 4px solid  rgb(102, 132, 197);
-    height: 80%;
+    height: 500px;
     margin-top: 3em;
-    width: 30%;
+    width: 500px;
     overflow-y: scroll;
     overflow: -moz-scrollbars-none;
     padding-left: 20px;
@@ -77,8 +77,3 @@ body{
   color: red;
 }
 
-@media (max-width:750px) {
-    .app{
-        width: 80%;
-    }
-}

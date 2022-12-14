@@ -59,7 +59,7 @@
                 
             
                         <span class="options">
-                        <i onClick="editPost(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
+                        <i onclick="editPost(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
                         <i onclick="deleteTask(this);createTasks()"  class="fas fa-trash-alt"></i>
                       </span>
                       </div>
@@ -81,13 +81,13 @@
         console.log(data);
      } 
      let editPost = (e) => {
-        let selectedTask = e.parentElement.parentElement;
+      let selectedTask = e.parentElement.parentElement;
 
-        textInput.value = selectedTask.children[0].innerHTML;
-        dateInput.value = selectedTask.children[1].innerHTML;
-        textarea.value = selectedTask.children[2].innerHTML;
-
-        selectedTask.remove();
+      textInput.value = selectedTask.children[0].innerHTML;
+      dateInput.value = selectedTask.children[1].innerHTML;
+      textarea.value = selectedTask.children[2].innerHTML;
+    
+      deleteTask(e);
       };
     
    let resetForm = () => {
